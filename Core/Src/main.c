@@ -52,12 +52,6 @@ CAN_HandleTypeDef hcan2;
 TIM_HandleTypeDef htim14;
 
 /* USER CODE BEGIN PV */
-uint32_t choose;
-uint32_t lastchoose;
-uint32_t mode;
-uint32_t node;
-uint32_t sign;
-uint32_t velocityORposition;
 int8_t homing_method = 0x1;
 int32_t homing_speeds_a = 1000;
 int32_t homing_speeds_b = 1000;
@@ -239,7 +233,7 @@ int main(void)
       int32_t homeoffset6;
 
 
-  //control_word for node 1...............................................................
+//control_word for node1(Gearbox1)...............................................................
 
       write_SDO(canopenNodeSTM32.canOpenStack->SDOclient , 1, 0x6040, 00, &tmp1, 2);
       HAL_Delay(10);
@@ -252,12 +246,7 @@ int main(void)
       write_SDO(canopenNodeSTM32.canOpenStack->SDOclient , 1, 0x6040, 00, &tmp5, 2);
       HAL_Delay(10);
 
-
-
-
-
-      //control_word for node 2...............................................................
-
+//control_word for node2(Gearbox2)...............................................................
 
       write_SDO(canopenNodeSTM32.canOpenStack->SDOclient , 2, 0x6040, 00, &tmp1, 2);
       HAL_Delay(10);
@@ -270,10 +259,7 @@ int main(void)
       write_SDO(canopenNodeSTM32.canOpenStack->SDOclient , 2, 0x6040, 00, &tmp5, 2);
       HAL_Delay(10);
 
-
-
-  //control_word for node 3...............................................................
-
+//control_word for node3(Gearbox3)...............................................................
 
       write_SDO(canopenNodeSTM32.canOpenStack->SDOclient , 3, 0x6040, 00, &tmp1, 2);
       HAL_Delay(10);
@@ -286,11 +272,7 @@ int main(void)
       write_SDO(canopenNodeSTM32.canOpenStack->SDOclient , 3, 0x6040, 00, &tmp5, 2);
       HAL_Delay(10);
 
-
-
-
- //control_word for node 4...............................................................
-
+//control_word for node4(Gearbox4)...............................................................
 
       write_SDO(canopenNodeSTM32.canOpenStack->SDOclient , 4, 0x6040, 00, &tmp1, 2);
       HAL_Delay(10);
@@ -303,9 +285,7 @@ int main(void)
       write_SDO(canopenNodeSTM32.canOpenStack->SDOclient , 4, 0x6040, 00, &tmp5, 2);
       HAL_Delay(10);
 
-
-  //control_word for node 5...............................................................
-
+//control_word for node5(Gearbox5)...............................................................
 
       write_SDO(canopenNodeSTM32.canOpenStack->SDOclient , 5, 0x6040, 00, &tmp1, 2);
       HAL_Delay(10);
@@ -318,11 +298,7 @@ int main(void)
       write_SDO(canopenNodeSTM32.canOpenStack->SDOclient , 5, 0x6040, 00, &tmp5, 2);
       HAL_Delay(10);
 
-
-
-
- //control_word for node 6...............................................................
-
+//control_word for node6(Gearbox6)...............................................................
 
       write_SDO(canopenNodeSTM32.canOpenStack->SDOclient , 6, 0x6040, 00, &tmp1, 2);
       HAL_Delay(10);
@@ -335,8 +311,8 @@ int main(void)
       write_SDO(canopenNodeSTM32.canOpenStack->SDOclient , 6, 0x6040, 00, &tmp5, 2);
       HAL_Delay(10);
 
+//offset is optional and you can use it if needed.......................................................................................
 
-//
 //      	 homeoffset1 = 9514666;
 //		 write_SDO(canopenNodeSTM32.canOpenStack->SDOclient , 1, 0x607C, 00, &homeoffset1, 4);
 //		 HAL_Delay(10);
@@ -371,8 +347,7 @@ int main(void)
 //		 HAL_Delay(10);
 
 
-
-
+//Specify mode........................................................................................................................................
 
 		 write_SDO(canopenNodeSTM32.canOpenStack->SDOclient , 1, 0x6060, 00, &homing_mode, 1);
 		 HAL_Delay(10);
@@ -387,7 +362,7 @@ int main(void)
 		 write_SDO(canopenNodeSTM32.canOpenStack->SDOclient , 6, 0x6060, 00, &homing_mode, 1);
 		 HAL_Delay(10);
 
-
+//Specify method.......................................................................................................................................
 
 		 write_SDO(canopenNodeSTM32.canOpenStack->SDOclient , 1, 0x6098, 00, &homing_method, 1);
 		 HAL_Delay(10);
@@ -403,7 +378,7 @@ int main(void)
 		 HAL_Delay(10);
 
 
-
+//Speed of the outward trajectory...................................................................................................................
 
 		 write_SDO(canopenNodeSTM32.canOpenStack->SDOclient , 1, 0x6099, 01, &homing_speeds_a, 4);
 		 HAL_Delay(10);
@@ -418,7 +393,7 @@ int main(void)
 		 write_SDO(canopenNodeSTM32.canOpenStack->SDOclient , 6, 0x6099, 01, &homing_speeds_a, 4);
 		 HAL_Delay(10);
 
-
+//Speed of the return trajectory.....................................................................................................................
 
 		 write_SDO(canopenNodeSTM32.canOpenStack->SDOclient , 1, 0x6099, 02, &homing_speeds_b, 4);
 		 HAL_Delay(10);
@@ -433,9 +408,7 @@ int main(void)
 		 write_SDO(canopenNodeSTM32.canOpenStack->SDOclient , 6, 0x6099, 02, &homing_speeds_b, 4);
 		 HAL_Delay(10);
 
-
-
-
+//Specify acceleration....................................................................................................................................
 
 		 write_SDO(canopenNodeSTM32.canOpenStack->SDOclient , 1, 0x609A, 02, &homing_ACC, 4);
 		 HAL_Delay(10);
@@ -450,9 +423,7 @@ int main(void)
 		 write_SDO(canopenNodeSTM32.canOpenStack->SDOclient , 6, 0x609A, 02, &homing_ACC, 4);
 		 HAL_Delay(10);
 
-
-
-
+//control_word temp6.....................................................................................................................................
 
 		 write_SDO(canopenNodeSTM32.canOpenStack->SDOclient , 1, 0x6040, 00, &tmp6, 2);
 		 HAL_Delay(10);
@@ -467,9 +438,6 @@ int main(void)
 		 write_SDO(canopenNodeSTM32.canOpenStack->SDOclient , 6, 0x6040, 00, &tmp6, 2);
 		 HAL_Delay(10);
 
-
-
-int64_t val = 0;
   /* USER CODE END 2 */
 
   /* Infinite loop */
